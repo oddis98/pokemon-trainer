@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="backColor"></div>
+  <div class="innerContainer">
+    <div>
+      <input
+        type="text"
+        placeholder="{{ placeholder }}"
+        (change)="onInputChange($event)"
+      />
+    </div>
+    <div>
+      <button (click)="onButtonClick()">
+        <img src="assets/Poke_Ball_icon.svg" alt="button" />
+      </button>
+    </div>
+  </div>
+</div>

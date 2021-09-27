@@ -1,0 +1,8 @@
+<div class="main">
+  <app-input
+    (complete)="onLoginButtonClick()"
+    (userEvent)="onInputChange($event)"
+    placeholder="Username"
+  ></app-input>
+  <p>{{ user[0]?.username }}</p>
+</div>
