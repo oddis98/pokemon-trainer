@@ -1,33 +1,36 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { LoginService } from 'src/app/services/login.service';
-import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
   styleUrls: ['./landing-page.component.css'],
 })
-export class LandingPageComponent implements OnInit, OnChanges {
+export class LandingPageComponent implements OnInit {
   private _user: string = '';
-  loggedUser: User[] = [];
 
   constructor(
     private readonly loginService: LoginService,
-    private readonly registerService: RegisterService
+    private router: Router
   ) {}
 
-  ngOnInit(): void {}
-
-  ngOnChanges(): void {}
+  ngOnInit(): void {
+    if (
+      localStorage.getItem('lit-ss') !== 'undefined' &&
+      localStorage.getItem('lit-ss')
+    ) {
+      this.router.navigate(['/trainer-page']);
+    }
+  }
 
   onInputChange(event: any): void {
     this._user = event;
-    this.loginService.fetchUser(this._user);
   }
 
   onLoginButtonClick(): void {
-    console.log(this.user);
+    this.loginService.fetchUser(this._user);
   }
 
   get user(): User[] {
