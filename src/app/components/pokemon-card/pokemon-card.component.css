@@ -1,0 +1,40 @@
+.container {
+  height: 21rem;
+  width: 15rem;
+  background: linear-gradient(to bottom right, #024, #402);
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 10px 10px 10px #868686;
+}
+
+.grass {
+  background-image: url("/assets/grass.png");
+  width: 80%;
+  margin: 10% 0;
+  text-align: center;
+}
+
+.name {
+  color: var(--secondary-text);
+  font-family: "Courier New", Courier, monospace;
+  margin-bottom: 3rem;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.btn:hover {
+  opacity: 50%;
+}
+
+.pokeball {
+  margin-top: 1rem;
+  width: 20%;
+}

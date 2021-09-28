@@ -12,7 +12,7 @@ export class AuthCanActivateGuard implements CanActivate {
   ) {}
 
   canActivate() {
-    const isLoggedIn: boolean = this.loginService.isLoggedIn();
+    const isLoggedIn: string | null = localStorage.getItem('lit-ss');
     if (isLoggedIn) return true;
 
     this.router.navigate(['/']);

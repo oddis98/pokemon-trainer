@@ -1,1 +1,9 @@
-<p>pokemon-catalogue-page works!</p>
+<div class="main">
+  <app-pokemon-card
+    *ngFor="let pokemon of pokemons"
+    [name]="pokemon.name"
+    [image]="pokemon.avatar"
+    [id]="pokemon.id"
+    [url]="pokemon.url"
+  ></app-pokemon-card>
+</div>

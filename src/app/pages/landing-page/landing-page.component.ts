@@ -33,6 +33,10 @@ export class LandingPageComponent implements OnInit {
     this.loginService.fetchUser(this._user);
   }
 
+  get isLoading(): boolean {
+    return this.loginService.isLoading();
+  }
+
   get user(): User[] {
     return this.loginService.user();
   }

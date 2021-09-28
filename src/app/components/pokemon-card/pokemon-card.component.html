@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="grass"><img src="{{ image }}" alt="{{ name }}" /></div>
+
+  <h4 class="name">{{ name }}</h4>
+  <button class="btn" (click)="onCatchButtonClick($event)">CATCH</button>
+  <img
+    *ngIf="caught"
+    class="pokeball"
+    src="assets/Poke_Ball_icon.svg"
+    alt="pokeball"
+  />
+</div>

@@ -6,6 +6,9 @@
     />
   </div>
 
-  <div class="profile" *ngIf="isLoggedIn"></div>
+  <div class="profile" *ngIf="isLoggedIn">
+    <p>username</p>
+    <img class="user" src="assets/user.svg" alt="user icon" />
+  </div>
 </nav>
 <router-outlet></router-outlet>

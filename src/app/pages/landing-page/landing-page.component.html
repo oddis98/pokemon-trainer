@@ -6,4 +6,7 @@
     placeholder="Username"
     [user]="user"
   ></app-input>
+  <div *ngIf="isLoading" class="loading">
+    <h1>Loading...</h1>
+  </div>
 </div>
