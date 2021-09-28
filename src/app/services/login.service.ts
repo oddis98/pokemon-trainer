@@ -7,6 +7,7 @@ import { User } from '../models/user.model';
 })
 export class LoginService {
   private _user: User[] = [];
+  private _isLoggedIn: boolean = false;
   private _response: string = '';
   private _error: string = '';
   private API_URL: string = 'https://noroff-api-oddalm.herokuapp.com/trainers';
@@ -22,6 +23,7 @@ export class LoginService {
           this.registerUser(username);
         }
         this._user = user;
+        this._isLoggedIn = true;
       },
       (error: HttpErrorResponse) => {
         this._error = error.message;
@@ -47,8 +49,8 @@ export class LoginService {
       )
       .subscribe(
         (response: string) => {
-          this.fetchUser(username);
           this._response = response;
+          this.fetchUser(username);
         },
         (error: HttpErrorResponse) => {
           this._error = error.message;
@@ -56,9 +58,7 @@ export class LoginService {
       );
   }
 
-  public response(): string {
-    return this._response;
-  }
+  public logout(): void {}
 
   public user(): User[] {
     return this._user;
@@ -66,5 +66,9 @@ export class LoginService {
 
   public error(): string {
     return this._error;
+  }
+
+  public isLoggedIn(): boolean {
+    return this._isLoggedIn;
   }
 }

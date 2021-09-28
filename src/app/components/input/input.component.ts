@@ -20,7 +20,7 @@ export class InputComponent implements OnChanges {
   @Input() placeholder?: string;
   @Input() user?: User[];
 
-  @Output() complete: EventEmitter<string> = new EventEmitter();
+  @Output() buttonClick: EventEmitter<string> = new EventEmitter();
   @Output() userEvent: EventEmitter<string> = new EventEmitter();
 
   constructor(private router: Router) {}
@@ -31,20 +31,16 @@ export class InputComponent implements OnChanges {
         'lit-ss',
         JSON.stringify(changes.user.currentValue[0])
       );
-      this.router.navigate(['/trainer-page']);
+      this.router.navigate(['/pokemon-catalogue']);
     }
   }
 
   onButtonClick(): void {
-    this.complete.emit('complete');
+    this.buttonClick.emit('complete');
   }
 
   onInputChange(event: any): void {
     this._user = event.target.value;
     this.userEvent.emit(this._user);
-  }
-
-  goToTrainerPage(): Promise<boolean> {
-    return this.router.navigate(['trainer-page']);
   }
 }

@@ -1,7 +1,7 @@
 <div class="main">
   <img class="pikachu" src="assets/Pokemon.svg" alt="Pikachu!" />
   <app-input
-    (complete)="onLoginButtonClick()"
+    (buttonClick)="onLoginButtonClick()"
     (userEvent)="onInputChange($event)"
     placeholder="Username"
     [user]="user"

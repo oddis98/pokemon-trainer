@@ -3,7 +3,7 @@
   align-items: center;
   min-height: calc(100vh - 6rem);
   flex-direction: column;
-  background: #f0f0f0;
+  background: var(--background);
 }
 
 .pikachu {

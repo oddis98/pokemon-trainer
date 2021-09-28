@@ -21,7 +21,7 @@ export class LandingPageComponent implements OnInit {
       localStorage.getItem('lit-ss') !== 'undefined' &&
       localStorage.getItem('lit-ss')
     ) {
-      this.router.navigate(['/trainer-page']);
+      this.router.navigate(['/pokemon-catalogue']);
     }
   }
 
