@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Pokemon } from 'src/app/models/pokemon.model';
+import { User } from 'src/app/models/user.model';
+import { LoginService } from 'src/app/services/login.service';
 import { PokemonService } from 'src/app/services/pokemon.service';
 
 @Component({
@@ -8,7 +10,7 @@ import { PokemonService } from 'src/app/services/pokemon.service';
   styleUrls: ['./pokemon-catalogue-page.component.css'],
 })
 export class PokemonCataloguePageComponent implements OnInit {
-  constructor(private readonly pokemonService: PokemonService) {}
+  constructor(private readonly pokemonService: PokemonService, private readonly loginService: LoginService) {}
 
   ngOnInit(): void {
     if (!localStorage.getItem('pokemons')) {
@@ -27,5 +29,9 @@ export class PokemonCataloguePageComponent implements OnInit {
       }
       return pokemon;
     });
+  }
+
+  get user(): User[]  {
+    return this.loginService.user()
   }
 }
