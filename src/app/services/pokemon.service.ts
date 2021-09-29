@@ -1,58 +1,60 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { forkJoin, Observable, of } from 'rxjs';
+import { concatMap, delay, finalize, tap } from 'rxjs/operators';
 import { Pokemon } from '../models/pokemon.model';
+import { SessionService } from './session.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PokemonService {
-  private _pokemons: any[] = [];
   private _error: string = '';
   private API_URL: string = 'https://pokeapi.co/api/v2/pokemon';
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private readonly http: HttpClient, 
+    private readonly sessionService: SessionService) {}
 
-  public fetchPokemon(): void {
-    this.http.get<Pokemon[]>(`${this.API_URL}`).subscribe(
-      (pokemon: any) => {
-        this._pokemons = pokemon.results.map((pokemon: any) => {
-          const url = pokemon.url.split('/');
-          if (url[url.length - 2] !== 'pokemon') {
-            const id = url[url.length - 2];
-            pokemon.avatar = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
-            pokemon.id = id;
-            return pokemon;
-          }
-          return pokemon;
-        });
-        this.setPokemonInfo();
-      },
-      (error: HttpErrorResponse) => {
-        this._error = error.message;
-      }
-    );
+  private getAllPokemon(): Observable<any> {
+    return this.http.get<any>(this.API_URL)
   }
 
-  private fetchIndividualPokemon(id: number): void {
-    this.http.get<any>(`${this.API_URL}/${id}`).subscribe(
+  public getPokemon(onSuccess: () => void): void{
+    this.getAllPokemon()
+    .pipe(
+      finalize(()=> {
+      })
+    ).subscribe(
       (pokemon: any) => {
-        this._pokemons[pokemon.id - 1] = pokemon;
+        if (pokemon){
+          this.sessionService.setPokemon(pokemon.results)
+          onSuccess()
+        }
       },
       (error: HttpErrorResponse) => {
-        this._error = error.message;
+        this._error = error.message
       }
-    );
-  }
-
-  public setPokemonInfo(): void {
-    for (const pokemon of this._pokemons) {
-      this.fetchIndividualPokemon(pokemon.id);
+    )
+  } 
+  public getPokemonInfo(): void {
+    const allPokemon = []
+    for (const pokemon of this.sessionService.getPokemon()){
+      const url = pokemon.url.split('/');
+      if (url[url.length - 2] !== 'pokemon') {
+        const id = url[url.length - 2];
+        pokemon.avatar = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+        pokemon.id = id;}
+      allPokemon.push(this.http.get<any>(`${this.API_URL}/${pokemon.id}`))
     }
-    console.log(this._pokemons);
-    localStorage.setItem('pokemons', JSON.stringify(this._pokemons));
+   forkJoin(allPokemon)
+   .subscribe(result => this.sessionService.setPokemon(result),
+   (error: HttpErrorResponse) => {
+    this._error = error.message
+  })
   }
-
+ 
   public pokemons() {
-    return JSON.parse(localStorage.getItem('pokemons') || '{}');
+    return JSON.parse(localStorage.getItem('pokemon') || '{}');
   }
 }

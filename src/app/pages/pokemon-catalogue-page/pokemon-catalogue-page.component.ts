@@ -3,6 +3,7 @@ import { Pokemon } from 'src/app/models/pokemon.model';
 import { User } from 'src/app/models/user.model';
 import { LoginService } from 'src/app/services/login.service';
 import { PokemonService } from 'src/app/services/pokemon.service';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-pokemon-catalogue-page',
@@ -12,20 +13,20 @@ import { PokemonService } from 'src/app/services/pokemon.service';
 export class PokemonCataloguePageComponent implements OnInit {
   constructor(
     private readonly pokemonService: PokemonService,
-    private readonly loginService: LoginService
+    private readonly sessionService: SessionService
   ) {}
 
   ngOnInit(): void {
-    if (!localStorage.getItem('pokemons')) {
-      this.pokemonService.fetchPokemon();
+    if (!localStorage.getItem('pokemon')) {
+      this.pokemonService.getPokemon(() => this.pokemonService.getPokemonInfo());
     }
   }
 
-  get pokemons(): Pokemon[] {
-    return this.pokemonService.pokemons();
+  get pokemons(): any[] {
+    return this.sessionService.getPokemon();
   }
 
-  get user(): User[] {
-    return this.loginService.user();
+  get user(): User | undefined {
+    return this.sessionService.getUser()
   }
 }

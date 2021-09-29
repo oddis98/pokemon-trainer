@@ -8,31 +8,22 @@ import { LoginService } from 'src/app/services/login.service';
   templateUrl: './pokemon-card.component.html',
   styleUrls: ['./pokemon-card.component.css'],
 })
-export class PokemonCardComponent implements OnInit, OnChanges {
+export class PokemonCardComponent implements OnInit {
   public caught: boolean = false;
 
   @Input() image: string = '';
   @Input() name: string = '';
   @Input() id: number = 0;
   @Input() url: string = '';
-  @Input() user?: User[];
+  @Input() user?: User;
 
   constructor(private readonly loginService: LoginService) {}
 
 
   ngOnInit(): void {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.user.currentValue[0] !== undefined) {
-      localStorage.setItem(
-        'lit-ss',
-        JSON.stringify(changes.user.currentValue[0])
-      );
-    }
-  }
-
   onCatchButtonClick(event: any): void {
-    const user = JSON.parse(localStorage.getItem('lit-ss') || '{}');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
 
     if (user) {
       this.loginService.updatePokemon(user.id, user.username, {

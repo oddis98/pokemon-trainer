@@ -18,7 +18,7 @@ export class InputComponent implements OnChanges {
   private _user: string = '';
 
   @Input() placeholder?: string;
-  @Input() user?: User[];
+  @Input() user?: User;
 
   @Output() buttonClick: EventEmitter<string> = new EventEmitter();
   @Output() userEvent: EventEmitter<string> = new EventEmitter();
@@ -28,7 +28,7 @@ export class InputComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.user.currentValue[0] !== undefined) {
       localStorage.setItem(
-        'lit-ss',
+        'user',
         JSON.stringify(changes.user.currentValue[0])
       );
       this.router.navigate(['/pokemon-catalogue']);

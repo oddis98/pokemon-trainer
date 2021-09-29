@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { LoginService } from 'src/app/services/login.service';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -13,13 +14,14 @@ export class LandingPageComponent implements OnInit {
 
   constructor(
     private readonly loginService: LoginService,
+    private readonly sessionService: SessionService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     if (
-      localStorage.getItem('lit-ss') !== 'undefined' &&
-      localStorage.getItem('lit-ss')
+      localStorage.getItem('user') !== 'undefined' &&
+      localStorage.getItem('user')
     ) {
       this.router.navigate(['/pokemon-catalogue']);
     }
@@ -30,14 +32,14 @@ export class LandingPageComponent implements OnInit {
   }
 
   onLoginButtonClick(): void {
-    this.loginService.fetchUser(this._user);
+    this.loginService.authenticate(this._user ,  () =>  this.router.navigate(["/pokemon-catalogue"]));
   }
 
   get isLoading(): boolean {
     return this.loginService.isLoading();
   }
 
-  get user(): User[] {
-    return this.loginService.user();
+  get user(): User | undefined {
+    return this.sessionService.getUser();
   }
 }

@@ -1,49 +1,39 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Pokemon } from '../models/pokemon.model';
 import { User } from '../models/user.model';
+import {finalize, switchMap} from 'rxjs/operators'
+import { SessionService } from './session.service';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  private _user: User[] = [];
   private _isLoggedIn: boolean = false;
   private _isLoading: boolean = false;
-  private _response: string = '';
   private _error: string = '';
   private API_URL: string = 'https://noroff-api-oddalm.herokuapp.com/trainers';
   private API_KEY =
     'qculjKQjXUX0uauq3T98kX4iDInwsNI3E0gvJffCy5WJa8GXRVbMLyd8aGaYqsAd';
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient, private readonly sessionService : SessionService) {}
 
-  public fetchUser(username: string): void {
-    this._isLoading = true;
-    this.http.get<User[]>(`${this.API_URL}?username=${username}`).subscribe(
-      (user: User[]) => {
-        if (user.length === 0) {
-          this.registerUser(username);
-        }
-        this._user = user;
-        this._isLoggedIn = true;
-        this._isLoading = false;
-      },
-      (error: HttpErrorResponse) => {
-        this._error = error.message;
-      }
-    );
+  private fetchUser(username: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.API_URL}?username=${username}`)
+    
   }
 
-  public registerUser(username: string): void {
+  private registerUser(username: string): Observable<User> {
     const requestOptions = {
       headers: {
         'X-API-Key': this.API_KEY,
         'Content-Type': 'application/json',
       },
     };
-    this.http
-      .post<string>(
+    return this.http
+      .post<User>(
         this.API_URL,
         {
           username,
@@ -51,20 +41,38 @@ export class LoginService {
         },
         requestOptions
       )
-      .subscribe(
-        (response: string) => {
-          this._response = response;
-          this.fetchUser(username);
-        },
-        (error: HttpErrorResponse) => {
-          this._error = error.message;
+  }
+
+  public authenticate(username: string, onSuccess: () => void): void {
+    this._isLoading = true
+
+    this.fetchUser(username)
+    .pipe(
+      switchMap((users: User[]) =>{
+        if (users.length){
+          return of(users[0])
         }
-      );
+        return this.registerUser(username)
+      }
+    ),
+    finalize(() => {
+      this._isLoading = false;
+    })).subscribe(
+      (user: User) =>{
+        if(user.id){
+          this.sessionService.setUser(user)
+          onSuccess();
+        }
+      },
+      (error: HttpErrorResponse) => {
+        this._error = error.message
+      }
+    )
   }
 
   public updatePokemon(id: number, username: string, pokemon: Pokemon): void {
     const newPokemon: Pokemon[] = JSON.parse(
-      localStorage.getItem('lit-ss') || '{}'
+      localStorage.getItem('user') || '{}'
     ).pokemon;
 
     newPokemon.push(pokemon);
@@ -85,9 +93,10 @@ export class LoginService {
         },
         requestOptions
       )
+      
       .subscribe(
         () => {
-          this.fetchUser(username);
+          this.authenticate(username, () => {});
         },
         (error: HttpErrorResponse) => {
           this._error = error.message;
@@ -95,18 +104,12 @@ export class LoginService {
       );
   }
 
-  public logout(): void {}
-
-  public user(): User[] {
-    return this._user;
-  }
-
   public error(): string {
     return this._error;
   }
 
   public isLoggedIn(): boolean {
-    if (localStorage.getItem('lit-ss')) {
+    if (localStorage.getItem('user')) {
       return true;
     }
     return this._isLoggedIn;
