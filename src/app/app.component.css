@@ -8,8 +8,14 @@ nav {
 .header {
   flex: 1;
 }
-.header img {
-  transform: translateX(-5rem) scale(0.6);
+.header h1 {
+  font-family: "Love Ya Like a sister";
+  margin-left: 1rem;
+  font-weight: 900;
+  font-size: 48px;
+  color: var(--primary-text);
+  text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000,
+    1px 1px 0 #000000;
 }
 
 .profile {
