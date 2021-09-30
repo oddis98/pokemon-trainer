@@ -1,8 +1,16 @@
-<div class="container">
+<div
+  class="container"
+  (click)="onCatchButtonClick()"
+  [ngStyle]="{ background: getColor(type) }"
+>
   <div class="grass"><img src="{{ image }}" alt="{{ name }}" /></div>
 
   <h4 class="name">{{ name }}</h4>
-  <button class="btn" (click)="onCatchButtonClick($event)">CATCH</button>
+  <ul>
+    <li *ngFor="let stat of stats" class="stats">
+      {{ stat.stat.name }}: {{ stat.base_stat }}
+    </li>
+  </ul>
   <img
     *ngIf="caught"
     class="pokeball"

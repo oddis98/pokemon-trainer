@@ -1,12 +1,17 @@
-<div class="main" *ngIf="pokemons.length > 0">
-  <div class="main" *ngIf="pokemons[0].sprites">
-      <app-pokemon-card
-        *ngFor="let pokemon of pokemons"
-        [name]="pokemon.name"
-        [image]="pokemon.sprites.front_default"
-        [id]="pokemon.id"
-        [url]="pokemon.url"
-        [user]="user"
-      ></app-pokemon-card>
+<div class="container" *ngIf="pokemons.length > 0 && pokemons[0].sprites">
+  <div class="buttons">
+    <button class="previous">Previous</button><button class="next">Next</button>
+  </div>
+
+  <div class="main">
+    <app-pokemon-card
+      *ngFor="let pokemon of pokemons"
+      [name]="pokemon.name"
+      [image]="pokemon.sprites.front_default"
+      [id]="pokemon.id"
+      [url]="pokemon.url"
+      [type]="pokemon.types[0].type.name"
+      [stats]="pokemon.stats"
+    ></app-pokemon-card>
   </div>
 </div>

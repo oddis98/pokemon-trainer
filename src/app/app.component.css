@@ -9,7 +9,7 @@ nav {
   flex: 1;
 }
 .header h1 {
-  font-family: "Love Ya Like a sister";
+  font-family: "pokemon-font", monospace;
   margin-left: 1rem;
   font-weight: 900;
   font-size: 48px;
@@ -25,7 +25,7 @@ nav {
   width: 10rem;
   border: 1px solid black;
   display: flex;
-  margin-right: 1rem;
+  align-items: center;
 }
 
 .user {
@@ -34,4 +34,8 @@ nav {
   transform: scale(3) translateX(1rem);
   background: var(--primary-text);
   border-radius: 50%;
+}
+
+.username {
+  flex: 1;
 }

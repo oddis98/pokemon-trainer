@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-input',
@@ -23,15 +24,20 @@ export class InputComponent implements OnChanges {
   @Output() buttonClick: EventEmitter<string> = new EventEmitter();
   @Output() userEvent: EventEmitter<string> = new EventEmitter();
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private readonly sessionService: SessionService
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.user.currentValue[0] !== undefined) {
-      localStorage.setItem(
-        'user',
-        JSON.stringify(changes.user.currentValue[0])
-      );
-      this.router.navigate(['/pokemon-catalogue']);
+    if (this.sessionService.getUser()) {
+      if (changes.user.currentValue[0] !== undefined) {
+        localStorage.setItem(
+          'user',
+          JSON.stringify(changes.user.currentValue[0])
+        );
+        this.router.navigate(['/pokemon-catalogue']);
+      }
     }
   }
 

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from './models/user.model';
-import { LoginService } from './services/login.service';
+import { SessionService } from './services/session.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,16 @@ import { LoginService } from './services/login.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  constructor(private readonly loginService: LoginService) {}
+  constructor(
+    private readonly sessionService: SessionService,
+    private readonly router: Router
+  ) {}
 
-  get isLoggedIn(): boolean {
-    return this.loginService.isLoggedIn();
+  public sendToTrainerPage() {
+    this.router.navigate(['/trainer-page']);
+  }
+
+  get user(): User {
+    return this.sessionService.getUser();
   }
 }

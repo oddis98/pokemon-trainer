@@ -1,7 +1,6 @@
 .container {
   height: 21rem;
   width: 15rem;
-  background: linear-gradient(to bottom right, #024, #402);
   margin: 1rem 0;
   border-radius: 0.5rem;
   display: flex;
@@ -12,31 +11,29 @@
 }
 
 .grass {
-  background-image: url("/assets/grass.png");
+  background-image: url("/assets/backdrop.png");
   background-size: 100%;
   width: 80%;
   margin: 10% 0;
   text-align: center;
 }
 
+.name,
+.stats {
+  font-family: "pokemon-font", monospace;
+}
+
 .name {
-  color: var(--secondary-text);
-  font-family: "Courier New", Courier, monospace;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 }
 
-.btn {
-  padding: 0.5rem 1rem;
-  border-radius: 0.3rem;
-  border: 1px solid black;
-  cursor: pointer;
-}
-
-.btn:hover {
-  opacity: 50%;
+.stats {
+  list-style: none;
+  padding: 0.1rem;
 }
 
 .pokeball {
   margin-top: 1rem;
-  width: 20%;
+  width: 15%;
+  transform: translateX(5.5rem) translateY(-1.5rem);
 }
