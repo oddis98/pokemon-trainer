@@ -24,6 +24,7 @@
 }
 
 .name,
+.button,
 .stats {
   font-family: "pokemon-font", monospace;
 }
@@ -49,7 +50,15 @@
 
 .button {
   padding: 0.5rem 1rem;
-  border-radius: 0.3rem;
+  border-radius: 0.2rem 1rem 0.2rem 1rem;
   border: 1px solid black;
   cursor: pointer;
+  background-color: var(--background);
+  font-weight: 700;
+  font-size: 1rem;
+
+}
+
+.button:hover{
+  opacity: 80%;
 }

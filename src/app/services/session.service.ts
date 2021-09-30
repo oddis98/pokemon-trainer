@@ -38,7 +38,7 @@ export class SessionService {
 
   logout() {
     this._user = undefined;
-    localStorage.removeItem('user');
+    localStorage.clear();
   }
 
   setNext(next: string): void {

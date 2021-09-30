@@ -26,6 +26,12 @@ nav {
   border: 1px solid black;
   display: flex;
   align-items: center;
+  cursor: pointer;
+  
+}
+
+.profile:hover{
+  opacity:90%
 }
 
 .user {
@@ -37,5 +43,7 @@ nav {
 }
 
 .username {
+  font-family: "pokemon-font", monospace;
   flex: 1;
+  font-weight: 600;
 }

@@ -92,6 +92,30 @@ export class PokemonCardComponent implements OnInit {
         return '#fcf5c7';
       case 'normal':
         return '#f0efeb';
+      case 'ice':
+        return '#d7e3fc'
+      case 'fighting':
+        return '#d4afb9'
+      case 'poison':
+        return '#cdb4db';
+      case 'ground':
+        return '#dab894';
+      case 'flying':
+        return '#dfb2f4';
+      case 'psychic':
+        return '#f49097';
+      case 'rock':
+        return '#d3ab9e';
+      case 'ghost':
+        return '#966fd6';
+      case 'dark':
+        return '#d1d1d1';
+      case 'dragon':
+        return '#9e56f0';
+      case 'steel':
+        return '#e2e2e2';
+      case 'fairy':
+        return '#fce1e4';
       default:
         return '#ffffff';
     }

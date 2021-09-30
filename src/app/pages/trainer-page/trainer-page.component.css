@@ -1,9 +1,48 @@
 .main {
-  background: var(--background);
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  min-height: calc(100vh - 6rem);
   padding: 0 20rem;
+  width: 100%;
+}
+
+.container {
+  background: var(--background);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: calc(100vh - 6rem);
+}
+
+
+.buttons {
+  padding: 2rem;
+ 
+}
+
+.buttons button {
+  padding: 0.5rem 1rem;
+  margin: 0 1rem 0 0;
+  border-radius: 0.3rem;
+  border: 1px solid black;
+  cursor: pointer;
+  font-family: "pokemon-font", monospace;
+ 
+}
+
+.buttons button:hover {
+  opacity: 70%;
+}
+
+.logout {
+  background-color: var(--primary-red) ;
+  color: var(--primary-text);
+  font-weight: 700;
+}
+
+.backToCatalogue {
+  background-color: var(--secondary-text) ;
+  color: var(--primary-red);
+  font-weight: 700;
 }

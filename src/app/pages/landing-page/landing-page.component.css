@@ -3,6 +3,10 @@
   align-items: center;
   min-height: calc(100vh - 6rem);
   flex-direction: column;
+  transform: translateY(-10rem);
+  
+}
+.container{
   background: var(--background);
 }
 
@@ -24,4 +28,13 @@
     1px 1px 0 #000;
   font-weight: 600;
   font-size: 48px;
+}
+
+@media screen and (max-width: 600px) {
+  .main{
+    transform: scale(0.5) translateY(-30rem);
+  }
+  .container{
+    max-height: calc(100vh - 6rem);
+  }
 }
