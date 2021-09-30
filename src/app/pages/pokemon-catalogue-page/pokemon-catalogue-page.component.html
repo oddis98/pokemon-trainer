@@ -1,6 +1,7 @@
 <div class="container" *ngIf="pokemons.length > 0 && pokemons[0].sprites">
   <div class="buttons">
-    <button class="previous">Previous</button><button class="next">Next</button>
+    <button class="previous" (click)="goToStart()">Back To Start</button
+    ><button class="next" (click)="goToNextPage()">Next</button>
   </div>
 
   <div class="main">
@@ -9,7 +10,6 @@
       [name]="pokemon.name"
       [image]="pokemon.sprites.front_default"
       [id]="pokemon.id"
-      [url]="pokemon.url"
       [type]="pokemon.types[0].type.name"
       [stats]="pokemon.stats"
     ></app-pokemon-card>

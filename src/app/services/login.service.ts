@@ -100,6 +100,36 @@ export class LoginService {
       );
   }
 
+  public deletePokemon(id: number, username: string, pokemon: Pokemon): void {
+    const pokemons: Pokemon[] = this.sessionService.getUser().pokemon;
+
+    const newPokemons = pokemons.filter((p) => p.id !== pokemon.id);
+
+    const requestOptions = {
+      headers: {
+        'X-API-Key': this.API_KEY,
+        'Content-Type': 'application/json',
+      },
+    };
+    this.http
+      .patch(
+        `${this.API_URL}/${id}`,
+        {
+          pokemon: newPokemons,
+        },
+        requestOptions
+      )
+
+      .subscribe(
+        () => {
+          this.authenticate(username, () => {});
+        },
+        (error: HttpErrorResponse) => {
+          this._error = error.message;
+        }
+      );
+  }
+
   public error(): string {
     return this._error;
   }

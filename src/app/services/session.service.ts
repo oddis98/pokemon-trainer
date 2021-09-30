@@ -27,6 +27,10 @@ export class SessionService {
     return JSON.parse(localStorage.getItem('pokemon') || '{}');
   }
 
+  getTrainerPokemon() {
+    return JSON.parse(localStorage.getItem('user') || '{]').pokemon;
+  }
+
   setPokemon(pokemon: any): void {
     this._pokemon = pokemon;
     localStorage.setItem('pokemon', JSON.stringify(pokemon));
@@ -35,5 +39,13 @@ export class SessionService {
   logout() {
     this._user = undefined;
     localStorage.removeItem('user');
+  }
+
+  setNext(next: string): void {
+    localStorage.setItem('next', next);
+  }
+
+  getNext(): string {
+    return localStorage.getItem('next') || '';
   }
 }

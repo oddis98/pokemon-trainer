@@ -1,1 +1,10 @@
-<p>trainer-page works!</p>
+<div class="main" *ngIf="pokemons.length > 0">
+  <app-pokemon-card
+    *ngFor="let pokemon of pokemons"
+    [name]="pokemon.name"
+    [image]="pokemon.avatar"
+    [id]="pokemon.id"
+    [type]="pokemon.type"
+    [disabled]="true"
+  ></app-pokemon-card>
+</div>

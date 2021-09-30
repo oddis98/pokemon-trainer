@@ -1,0 +1,9 @@
+.main {
+  background: var(--background);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  min-height: calc(100vh - 6rem);
+  padding: 0 20rem;
+}

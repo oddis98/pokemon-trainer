@@ -1,7 +1,11 @@
 <div
   class="container"
   (click)="onCatchButtonClick()"
-  [ngStyle]="{ background: getColor(type) }"
+  [ngStyle]="{
+    background: getColor(type),
+    opacity: opacity(),
+    cursor: cursor()
+  }"
 >
   <div class="grass"><img src="{{ image }}" alt="{{ name }}" /></div>
 
@@ -11,6 +15,12 @@
       {{ stat.stat.name }}: {{ stat.base_stat }}
     </li>
   </ul>
+  <div class="btn-div">
+    <button *ngIf="disabled" (click)="onDeleteButtonClick()" class="button">
+      Release
+    </button>
+  </div>
+
   <img
     *ngIf="caught"
     class="pokeball"

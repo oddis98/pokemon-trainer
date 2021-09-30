@@ -8,22 +8,22 @@ import { SessionService } from './session.service';
 })
 export class PokemonService {
   private _error: string = '';
-  private API_URL: string = 'https://pokeapi.co/api/v2/pokemon';
 
   constructor(
     private readonly http: HttpClient,
     private readonly sessionService: SessionService
   ) {}
 
-  private getAllPokemon(): Observable<any> {
-    return this.http.get<any>(this.API_URL);
+  private getAllPokemon(url: string): Observable<any> {
+    return this.http.get<any>(url);
   }
 
-  public getPokemon(onSuccess: () => void): void {
-    this.getAllPokemon().subscribe(
+  public getPokemon(url: string, onSuccess: () => void): void {
+    this.getAllPokemon(url).subscribe(
       (pokemon: any) => {
         if (pokemon) {
           this.sessionService.setPokemon(pokemon.results);
+          this.sessionService.setNext(pokemon.next);
           onSuccess();
         }
       },
@@ -32,7 +32,7 @@ export class PokemonService {
       }
     );
   }
-  public getPokemonInfo(): void {
+  public getPokemonInfo(urlToPokemon: string): void {
     const allPokemon = [];
     for (const pokemon of this.sessionService.getPokemon()) {
       const url = pokemon.url.split('/');
@@ -41,7 +41,7 @@ export class PokemonService {
         pokemon.avatar = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
         pokemon.id = id;
       }
-      allPokemon.push(this.http.get<any>(`${this.API_URL}/${pokemon.id}`));
+      allPokemon.push(this.http.get<any>(`${urlToPokemon}/${pokemon.id}`));
     }
     forkJoin(allPokemon).subscribe(
       (result) => this.sessionService.setPokemon(result),

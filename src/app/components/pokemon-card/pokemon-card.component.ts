@@ -13,9 +13,9 @@ export class PokemonCardComponent implements OnInit {
   @Input() image: string = '';
   @Input() name: string = '';
   @Input() id: number = 0;
-  @Input() url: string = '';
   @Input() type: string = '';
   @Input() stats: any;
+  @Input() disabled: boolean = false;
 
   constructor(
     private readonly loginService: LoginService,
@@ -33,18 +33,49 @@ export class PokemonCardComponent implements OnInit {
   }
 
   onCatchButtonClick(): void {
+    if (!this.disabled) {
+      if (this.sessionService.getUser()) {
+        this.loginService.updatePokemon(
+          this.sessionService.getUser().id,
+          this.sessionService.getUser().username,
+          {
+            id: this.id,
+            name: this.name,
+            avatar: this.image,
+            type: this.type,
+          }
+        );
+      }
+    }
+  }
+
+  onDeleteButtonClick(): void {
     if (this.sessionService.getUser()) {
-      this.loginService.updatePokemon(
+      this.loginService.deletePokemon(
         this.sessionService.getUser().id,
         this.sessionService.getUser().username,
         {
           id: this.id,
           name: this.name,
-          url: this.url,
           avatar: this.image,
+          type: this.type,
         }
       );
     }
+  }
+
+  opacity() {
+    if (this.disabled) {
+      return '100%';
+    }
+    return '';
+  }
+
+  cursor() {
+    if (this.disabled) {
+      return 'default';
+    }
+    return '';
   }
 
   getColor(type: string) {
