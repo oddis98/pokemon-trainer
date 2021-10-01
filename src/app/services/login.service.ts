@@ -5,6 +5,7 @@ import { Pokemon } from '../models/pokemon.model';
 import { User } from '../models/user.model';
 import { finalize, switchMap } from 'rxjs/operators';
 import { SessionService } from './session.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +13,8 @@ import { SessionService } from './session.service';
 export class LoginService {
   private _isLoading: boolean = false;
   private _error: string = '';
-  private API_URL: string = 'https://noroff-api-oddalm.herokuapp.com/trainers';
-  private API_KEY =
-    'qculjKQjXUX0uauq3T98kX4iDInwsNI3E0gvJffCy5WJa8GXRVbMLyd8aGaYqsAd';
+  private API_URL: string = environment.apiUrl;
+  private API_KEY: string = environment.apiKey;
 
   constructor(
     private readonly http: HttpClient,
