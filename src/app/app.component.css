@@ -20,14 +20,13 @@ nav {
 
 .profile {
   background: var(--primary-text);
-  padding: 0.5rem 5rem 0.5rem 1rem;
+  padding: 0.5rem 0 0.5rem 1rem;
   border-radius: 1rem 0 0 1rem;
   min-width: 10rem;
   border: 1px solid black;
   display: flex;
   align-items: center;
   cursor: pointer;
-  transform: translateX(15rem);
 }
 
 .profile:hover {
@@ -35,10 +34,11 @@ nav {
 }
 
 .user {
-  width: 5%;
-  height: 30%;
+  width: 10%;
   transform: scale(3) translateX(1rem);
   background: var(--primary-text);
+  display: flex;
+  align-items: center;
   border-radius: 50%;
 }
 
