@@ -22,20 +22,20 @@ nav {
   background: var(--primary-text);
   padding: 0.5rem 5rem 0.5rem 1rem;
   border-radius: 1rem 0 0 1rem;
-  width: 10rem;
+  min-width: 10rem;
   border: 1px solid black;
   display: flex;
   align-items: center;
   cursor: pointer;
-  
+  transform: translateX(15rem);
 }
 
-.profile:hover{
-  opacity:90%
+.profile:hover {
+  opacity: 90%;
 }
 
 .user {
-  width: 30%;
+  width: 5%;
   height: 30%;
   transform: scale(3) translateX(1rem);
   background: var(--primary-text);
@@ -44,6 +44,5 @@ nav {
 
 .username {
   font-family: "pokemon-font", monospace;
-  flex: 1;
   font-weight: 600;
 }
