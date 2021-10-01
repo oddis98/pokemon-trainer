@@ -1,17 +1,44 @@
 <div class="container">
   <div class="backColor"></div>
   <div class="innerContainer">
-    <div>
-      <input
-        type="text"
-        placeholder="{{ placeholder }}"
-        (change)="onInputChange($event)"
-      />
-    </div>
-    <div>
-      <button (click)="onButtonClick()">
+    <form
+      class="form"
+      #loginForm="ngForm"
+      (ngSubmit)="onButtonClick(loginForm)"
+    >
+      <div>
+        <input
+          type="text"
+          ngModel
+          #username="ngModel"
+          name="username"
+          id="username"
+          required
+          minlength="2"
+          maxlength="40"
+          placeholder="{{ placeholder }}"
+        />
+
+        <section
+          *ngIf="username.errors && (username.dirty || username.touched)"
+        >
+          <div>
+            <p class="error" *ngIf="username.errors.required">
+              You need to enter a username
+            </p>
+            <p class="error" *ngIf="username.errors.minlength">
+              The username you chose is too short
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <button type="submit" [disabled]="isLoading || loginForm.form.invalid">
         <img src="assets/Poke_Ball_icon.svg" alt="button" />
       </button>
-    </div>
+    </form>
+
+    <div></div>
+    <div></div>
   </div>
 </div>

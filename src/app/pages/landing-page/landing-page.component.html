@@ -1,12 +1,7 @@
 <div class="container">
   <div class="main">
     <img class="pikachu" src="assets/Pokemon.svg" alt="Pikachu!" />
-    <app-input
-      (buttonClick)="onLoginButtonClick()"
-      (userEvent)="onInputChange($event)"
-      placeholder="Username"
-      [user]="user"
-    ></app-input>
+    <app-input placeholder="Username" [user]="user"></app-input>
     <div *ngIf="isLoading" class="loading">
       <h1>Loading...</h1>
     </div>

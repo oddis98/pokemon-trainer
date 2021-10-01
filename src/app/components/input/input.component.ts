@@ -6,8 +6,10 @@ import {
   SimpleChanges,
   OnChanges,
 } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
+import { LoginService } from 'src/app/services/login.service';
 import { SessionService } from 'src/app/services/session.service';
 
 @Component({
@@ -16,8 +18,6 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./input.component.css'],
 })
 export class InputComponent implements OnChanges {
-  private _user: string = '';
-
   @Input() placeholder?: string;
   @Input() user?: User;
 
@@ -26,7 +26,8 @@ export class InputComponent implements OnChanges {
 
   constructor(
     private router: Router,
-    private readonly sessionService: SessionService
+    private readonly sessionService: SessionService,
+    private readonly loginService: LoginService
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -41,12 +42,14 @@ export class InputComponent implements OnChanges {
     }
   }
 
-  onButtonClick(): void {
-    this.buttonClick.emit('complete');
+  get isLoading(): boolean {
+    return this.loginService.isLoading();
   }
 
-  onInputChange(event: any): void {
-    this._user = event.target.value;
-    this.userEvent.emit(this._user);
+  onButtonClick(loginForm: NgForm): void {
+    const { username } = loginForm.value;
+    this.loginService.authenticate(username, () =>
+      this.router.navigate(['/pokemon-catalogue'])
+    );
   }
 }

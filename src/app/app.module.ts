@@ -9,6 +9,7 @@ import { TrainerPageComponent } from './pages/trainer-page/trainer-page.componen
 import { PokemonCataloguePageComponent } from './pages/pokemon-catalogue-page/pokemon-catalogue-page.component';
 import { InputComponent } from './components/input/input.component';
 import { PokemonCardComponent } from './components/pokemon-card/pokemon-card.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { PokemonCardComponent } from './components/pokemon-card/pokemon-card.com
     InputComponent,
     PokemonCardComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

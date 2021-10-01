@@ -44,6 +44,22 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  opacity: 50%;
+button:disabled {
+  cursor: default;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  z-index: 1;
+  height: 100%;
+}
+
+.error {
+  color: var(--primary-red);
+  font-size: 24px;
+  text-decoration: underline;
+  margin: 1rem 0 0 1rem;
 }

@@ -10,8 +10,6 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./landing-page.component.css'],
 })
 export class LandingPageComponent implements OnInit {
-  private _user: string = '';
-
   constructor(
     private readonly loginService: LoginService,
     private readonly sessionService: SessionService,
@@ -25,14 +23,6 @@ export class LandingPageComponent implements OnInit {
     ) {
       this.router.navigate(['/pokemon-catalogue']);
     }
-  }
-
-  onInputChange(event: any): void {
-    this._user = event;
-  }
-
-  onLoginButtonClick(): void {
-    this.loginService.authenticate(this._user ,  () =>  this.router.navigate(["/pokemon-catalogue"]));
   }
 
   get isLoading(): boolean {
