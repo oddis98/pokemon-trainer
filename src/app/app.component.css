@@ -8,13 +8,41 @@ nav {
 .header {
   flex: 1;
 }
-.header img {
-  transform: translateX(-5rem) scale(0.6);
+.header h1 {
+  font-family: "pokemon-font", monospace;
+  margin-left: 1rem;
+  font-weight: 900;
+  font-size: 48px;
+  color: var(--primary-text);
+  text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000,
+    1px 1px 0 #000000;
 }
 
 .profile {
-  background: #000000;
-  width: 2rem;
-  height: 2rem;
-  margin-right: 1rem;
+  background: var(--primary-text);
+  padding: 0.5rem 0 0.5rem 1rem;
+  border-radius: 1rem 0 0 1rem;
+  min-width: 10rem;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.profile:hover {
+  opacity: 90%;
+}
+
+.user {
+  width: 10%;
+  transform: scale(3) translateX(1rem);
+  background: var(--primary-text);
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.username {
+  font-family: "pokemon-font", monospace;
+  font-weight: 600;
 }

@@ -1,1 +1,16 @@
-<p>trainer-page works!</p>
+<div class="container">
+  <div class="buttons">
+    <button class="logout" (click)="logout()">Logout</button
+    ><button class="backToCatalogue" (click)="backToCatalogue()">Back To Catalogue</button>
+  </div>
+  <div class="main" *ngIf="pokemons.length > 0">
+    <app-pokemon-card
+      *ngFor="let pokemon of pokemons"
+      [name]="pokemon.name"
+      [image]="pokemon.avatar"
+      [id]="pokemon.id"
+      [type]="pokemon.type"
+      [disabled]="true"
+    ></app-pokemon-card>
+  </div>
+</div>

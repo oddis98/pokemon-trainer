@@ -4,7 +4,7 @@
   height: 16rem;
   border-radius: 1rem;
   justify-content: space-between;
-  background: #000000;
+  background: var(--secondary-grey);
   box-shadow: 20px 20px 60px #b0b0b0, -20px -20px 60px #eeeeee;
 }
 .innerContainer {
@@ -41,4 +41,9 @@ img {
 button {
   border-radius: 50%;
   border: 1px solid black;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 50%;
 }

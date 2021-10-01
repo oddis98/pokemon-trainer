@@ -1,11 +1,13 @@
 <nav>
   <div class="header">
-    <img
-      src="https://fontmeme.com/permalink/210927/a7183cbf854a894490aede9fd023a61e.png"
-      alt="pokemon-font"
-    />
+    <h1>Pokemon Trainer</h1>
   </div>
 
-  <div class="profile" *ngIf="loggedIn"></div>
+  <div class="profile" *ngIf="user.username" (click)="sendToTrainerPage()">
+    <p class="username">{{ user.username }}</p>
+    <div class="user">
+      <img src="assets/Poke_Ball_icon.svg" alt="user icon" />
+    </div>
+  </div>
 </nav>
 <router-outlet></router-outlet>

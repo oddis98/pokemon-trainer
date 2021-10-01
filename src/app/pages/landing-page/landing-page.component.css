@@ -1,8 +1,40 @@
 .main {
   display: flex;
   align-items: center;
-  justify-content: center;
-  height: calc(100vh - 6rem);
+  min-height: calc(100vh - 6rem);
   flex-direction: column;
-  background: #f0f0f0;
+  transform: translateY(-10rem);
+  
+}
+.container{
+  background: var(--background);
+}
+
+.pikachu {
+  width: 30rem;
+  height: 30rem;
+  transform: translateY(7.3rem);
+}
+
+.loading {
+  height: 5rem;
+  padding: 5rem;
+  font-family: "Love Ya Like a sister";
+  color: var(--primary-text);
+}
+
+.loading h1 {
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+  font-weight: 600;
+  font-size: 48px;
+}
+
+@media screen and (max-width: 600px) {
+  .main{
+    transform: scale(0.5) translateY(-30rem);
+  }
+  .container{
+    max-height: calc(100vh - 6rem);
+  }
 }

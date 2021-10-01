@@ -1,1 +1,17 @@
-<p>pokemon-catalogue-page works!</p>
+<div class="container" *ngIf="pokemons.length > 0 && pokemons[0].sprites">
+  <div class="buttons">
+    <button class="previous" (click)="goToStart()">Back To Start</button
+    ><button class="next" (click)="goToNextPage()">Next</button>
+  </div>
+
+  <div class="main">
+    <app-pokemon-card
+      *ngFor="let pokemon of pokemons"
+      [name]="pokemon.name"
+      [image]="pokemon.sprites.front_default"
+      [id]="pokemon.id"
+      [type]="pokemon.types[0].type.name"
+      [stats]="pokemon.stats"
+    ></app-pokemon-card>
+  </div>
+</div>

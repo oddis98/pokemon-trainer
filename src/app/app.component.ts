@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from './models/user.model';
+import { SessionService } from './services/session.service';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +9,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'pokemon-trainer';
-  loggedIn: boolean = false;
+  constructor(
+    private readonly sessionService: SessionService,
+    private readonly router: Router
+  ) {}
+
+  public sendToTrainerPage() {
+    this.router.navigate(['/trainer-page']);
+  }
+
+  get user(): User {
+    return this.sessionService.getUser();
+  }
 }

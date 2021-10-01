@@ -8,6 +8,7 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 import { TrainerPageComponent } from './pages/trainer-page/trainer-page.component';
 import { PokemonCataloguePageComponent } from './pages/pokemon-catalogue-page/pokemon-catalogue-page.component';
 import { InputComponent } from './components/input/input.component';
+import { PokemonCardComponent } from './components/pokemon-card/pokemon-card.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { InputComponent } from './components/input/input.component';
     TrainerPageComponent,
     PokemonCataloguePageComponent,
     InputComponent,
+    PokemonCardComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
