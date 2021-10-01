@@ -15,7 +15,11 @@ export class LandingPageComponent implements OnInit {
     private readonly sessionService: SessionService,
     private router: Router
   ) {}
-
+  
+  /**
+   * if there is user in local storage
+   * redirect user to pokemon-catalogue
+   */
   ngOnInit(): void {
     if (
       localStorage.getItem('user') !== 'undefined' &&

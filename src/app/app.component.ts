@@ -13,7 +13,10 @@ export class AppComponent {
     private readonly sessionService: SessionService,
     private readonly router: Router
   ) {}
-
+  
+  /**
+   * redirects the user to the trainer-page
+   */
   public sendToTrainerPage() {
     this.router.navigate(['/trainer-page']);
   }

@@ -10,6 +10,9 @@ import { SessionService } from 'src/app/services/session.service';
 export class PokemonCardComponent implements OnInit {
   public caught: boolean = false;
 
+  /**
+   * Inherited variables from pokemon-catalogue/trainer-page
+   */
   @Input() image: string = '';
   @Input() name: string = '';
   @Input() id: number = 0;
@@ -21,7 +24,11 @@ export class PokemonCardComponent implements OnInit {
     private readonly loginService: LoginService,
     private readonly sessionService: SessionService
   ) {}
-
+  
+  /**
+   * when initialized, checks if the user has caught a pokemon
+   * If true, caught = true
+   */
   ngOnInit(): void {
     if (this.sessionService.getUser()) {
       for (const pokemon of this.sessionService.getUser().pokemon) {
@@ -32,6 +39,10 @@ export class PokemonCardComponent implements OnInit {
     }
   }
 
+  /**
+   * if !disabled, tries to catch the current pokemon
+   * sends a pokemon object with its values
+   */
   onCatchButtonClick(): void {
     if (!this.disabled) {
       if (this.sessionService.getUser()) {
@@ -49,6 +60,9 @@ export class PokemonCardComponent implements OnInit {
     }
   }
 
+  /**
+   * dispatches deletepokemon from loginservice.
+   */
   onDeleteButtonClick(): void {
     if (this.sessionService.getUser()) {
       this.loginService.deletePokemon(
@@ -64,6 +78,9 @@ export class PokemonCardComponent implements OnInit {
     }
   }
 
+  /**
+   * reverts the opacity effect on cards when disabled.
+   */
   opacity() {
     if (this.disabled) {
       return '100%';
@@ -71,13 +88,20 @@ export class PokemonCardComponent implements OnInit {
     return '';
   }
 
+    /**
+   * reverts the cursor effect on cards when disabled.
+   */
   cursor() {
     if (this.disabled) {
       return 'default';
     }
     return '';
   }
-
+  
+  /**
+   * Switch statement 
+   * returns custom color hexcodes based on pokemon type.
+   */
   getColor(type: string) {
     switch (type) {
       case 'grass':

@@ -13,11 +13,17 @@ export class PokemonService {
     private readonly http: HttpClient,
     private readonly sessionService: SessionService
   ) {}
-
+  
+  /**
+   * fetches 20 pokemon based on the url
+   */
   private getAllPokemon(url: string): Observable<any> {
     return this.http.get<any>(url);
   }
 
+  /**
+   * runs getAllPokemon and onSucess - Gets PokemonInfo.
+   */
   public getPokemon(url: string, onSuccess: () => void): void {
     this.getAllPokemon(url).subscribe(
       (pokemon: any) => {
@@ -32,6 +38,10 @@ export class PokemonService {
       }
     );
   }
+
+  /**
+   * Fetches detailed info for current pokemons and dispatches setPokemon from sessionservice.
+   */
   public getPokemonInfo(urlToPokemon: string): void {
     const allPokemon = [];
     for (const pokemon of this.sessionService.getPokemon()) {

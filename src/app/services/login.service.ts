@@ -20,11 +20,17 @@ export class LoginService {
     private readonly http: HttpClient,
     private readonly sessionService: SessionService
   ) {}
-
+  
+  /**
+   * fetches user from loginAPI
+   */
   private fetchUser(username: string): Observable<User[]> {
     return this.http.get<User[]>(`${this.API_URL}?username=${username}`);
   }
 
+  /**
+   * registers user in the loginAPI
+   */
   private registerUser(username: string): Observable<User> {
     const requestOptions = {
       headers: {
@@ -41,7 +47,12 @@ export class LoginService {
       requestOptions
     );
   }
-
+  
+  /**
+   * authenticates the user by first trying to login.
+   * if the user does not exists, the user is registered and logged in
+   * sets the user in localstorage
+   */
   public authenticate(username: string, onSuccess: () => void): void {
     this._isLoading = true;
 
@@ -70,6 +81,11 @@ export class LoginService {
       );
   }
 
+  /**
+   * fetches the pokemons from the current logged in user
+   * adds pokemons from parameters to the lists and updates the list in te pokemonAPI
+   * runs authenticate to set new session with the updated pokemon array
+   */
   public updatePokemon(id: number, username: string, pokemon: Pokemon): void {
     const newPokemon: Pokemon[] = this.sessionService.getUser().pokemon;
 
@@ -100,6 +116,10 @@ export class LoginService {
       );
   }
 
+  /**
+   * deletes a pokemon by filtering the pokemon array based on pokemon in parameters.
+   * runs authenticate to set the session with the updated pokemon array.
+   */
   public deletePokemon(id: number, username: string, pokemon: Pokemon): void {
     const pokemons: Pokemon[] = this.sessionService.getUser().pokemon;
 

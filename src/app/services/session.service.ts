@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 
+/**
+ * Gathers and sets different data to localstorage.
+ */
 @Injectable({
   providedIn: 'root',
 })
@@ -8,6 +11,7 @@ export class SessionService {
   private _user?: User;
   private _pokemon: any = [];
 
+  
   constructor() {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {

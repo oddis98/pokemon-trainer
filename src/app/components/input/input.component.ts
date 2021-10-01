@@ -18,18 +18,22 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./input.component.css'],
 })
 export class InputComponent implements OnChanges {
+  /**
+   * Variables inherited from Landing-page
+   */
   @Input() placeholder?: string;
   @Input() user?: User;
-
-  @Output() buttonClick: EventEmitter<string> = new EventEmitter();
-  @Output() userEvent: EventEmitter<string> = new EventEmitter();
 
   constructor(
     private router: Router,
     private readonly sessionService: SessionService,
     private readonly loginService: LoginService
   ) {}
-
+  
+  /**
+   * Checks for changes in session
+   * if a user exists in localstorage, redirect the user to pokemon-catalogue
+   */
   ngOnChanges(changes: SimpleChanges): void {
     if (this.sessionService.getUser()) {
       if (changes.user.currentValue[0] !== undefined) {
@@ -41,11 +45,15 @@ export class InputComponent implements OnChanges {
       }
     }
   }
-
+  
   get isLoading(): boolean {
     return this.loginService.isLoading();
   }
 
+  /**
+   * disptatches authenticate function from loginservice
+   * redirects the user to pokemon-catalogue
+   */
   onButtonClick(loginForm: NgForm): void {
     const { username } = loginForm.value;
     this.loginService.authenticate(username, () =>

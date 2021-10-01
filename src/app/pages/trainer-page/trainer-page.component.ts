@@ -7,23 +7,27 @@ import { SessionService } from 'src/app/services/session.service';
   templateUrl: './trainer-page.component.html',
   styleUrls: ['./trainer-page.component.css'],
 })
-export class TrainerPageComponent implements OnInit {
+export class TrainerPageComponent {
   constructor(private readonly sessionService: SessionService, private readonly router: Router) {}
-
-  ngOnInit(): void {}
 
   get pokemons(): any[] {
     return this.sessionService.getTrainerPokemon();
   }
 
+  /**
+   * dispatches logout from sessionService
+   * returns the user to the landing-page
+   */
   logout(){
    this.sessionService.logout()
    return this.router.navigate(["/landing-page"])
     
   }
 
+  /**
+   * returns the user to the pokemon-catalogue
+   */
   backToCatalogue(){
     return this.router.navigate(["/pokemon-catalogue"])
-
   }
 }
